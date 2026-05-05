@@ -14,8 +14,26 @@ export interface HistoryRecord {
   language: string;
   todayStars: number;
   reportFile: string;
+  tags: string[];
+  summary: string;
 }
 
 export interface History {
   records: HistoryRecord[];
+}
+
+export interface CatalogEntry {
+  repo: string;
+  url: string;
+  date: string;
+  language: string;
+  tags: string[];
+  summary: string;
+  reportFile: string;
+}
+
+export interface Catalog {
+  entries: CatalogEntry[];
+  byTag: Record<string, string[]>;       // tag -> repo names
+  byLanguage: Record<string, string[]>;  // language -> repo names
 }

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(npx tsx *)",
+      "Bash(node *)",
+      "Bash('article.Box-row')",
+      "Bash(el)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

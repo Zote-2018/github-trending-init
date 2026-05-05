@@ -6,7 +6,8 @@
   "scripts": {
     "start": "tsx src/index.ts",
     "schedule": "tsx src/scheduler.ts register",
-    "unschedule": "tsx src/scheduler.ts unregister"
+    "unschedule": "tsx src/scheduler.ts unregister",
+    "search": "tsx src/search.ts"
   },
   "keywords": [],
   "author": "",
