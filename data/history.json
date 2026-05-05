@@ -1,0 +1,23 @@
+{
+  "records": [
+    {
+      "date": "2026-05-05",
+      "repo": "ruvnet/ruflo",
+      "stars": 0,
+      "language": "TypeScript",
+      "todayStars": 2598,
+      "reportFile": "reports/2026-05-05-ruvnet-ruflo.md",
+      "tags": [
+        "typescript",
+        "multi-agent",
+        "mcp",
+        "claude-code",
+        "swarm-intelligence",
+        "vector-database",
+        "ai-orchestration",
+        "plugin"
+      ],
+      "summary": "面向Claude Code的多Agent编排平台，支持100+专业Agent集群、自学习记忆、零信任联邦通信和GOAP目标规划"
+    }
+  ]
+}

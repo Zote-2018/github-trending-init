@@ -1,0 +1,53 @@
+{
+  "entries": [
+    {
+      "repo": "ruvnet/ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "date": "2026-05-05",
+      "language": "TypeScript",
+      "tags": [
+        "typescript",
+        "multi-agent",
+        "mcp",
+        "claude-code",
+        "swarm-intelligence",
+        "vector-database",
+        "ai-orchestration",
+        "plugin"
+      ],
+      "summary": "面向Claude Code的多Agent编排平台，支持100+专业Agent集群、自学习记忆、零信任联邦通信和GOAP目标规划",
+      "reportFile": "reports/2026-05-05-ruvnet-ruflo.md"
+    }
+  ],
+  "byTag": {
+    "typescript": [
+      "ruvnet/ruflo"
+    ],
+    "multi-agent": [
+      "ruvnet/ruflo"
+    ],
+    "mcp": [
+      "ruvnet/ruflo"
+    ],
+    "claude-code": [
+      "ruvnet/ruflo"
+    ],
+    "swarm-intelligence": [
+      "ruvnet/ruflo"
+    ],
+    "vector-database": [
+      "ruvnet/ruflo"
+    ],
+    "ai-orchestration": [
+      "ruvnet/ruflo"
+    ],
+    "plugin": [
+      "ruvnet/ruflo"
+    ]
+  },
+  "byLanguage": {
+    "typescript": [
+      "ruvnet/ruflo"
+    ]
+  }
+}
