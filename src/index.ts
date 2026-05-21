@@ -67,7 +67,7 @@ async function main() {
 
   // 4. Claude 深度分析
   console.log('🤖 正在调用 Claude 深度分析...');
-  const { content: analysisContent, tags, summary } = analyzeRepo(repo);
+  const { content: analysisContent, tags, summary } = await analyzeRepo(repo);
   console.log(`✅ 分析完成 | 标签: ${tags.join(', ')}`);
   console.log(`📝 摘要: ${summary}`);
 

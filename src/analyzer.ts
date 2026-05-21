@@ -2,7 +2,9 @@ import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
+import fetch from 'node-fetch';
 import { TrendingRepo } from './types';
+import { loadConfig, validateConfig, AppConfig } from './config';
 
 const ANALYSIS_PROMPT = `You are a senior GitHub project analyst. Analyze the following trending GitHub repository thoroughly and respond in Chinese.
 
@@ -57,33 +59,17 @@ export interface AnalysisResult {
   summary: string;
 }
 
-export function analyzeRepo(repo: TrendingRepo): AnalysisResult {
-  const prompt = ANALYSIS_PROMPT
+function buildPrompt(repo: TrendingRepo): string {
+  return ANALYSIS_PROMPT
     .replace(/\{repo\}/g, repo.name)
     .replace(/\{url\}/g, repo.url)
     .replace(/\{description\}/g, repo.description || 'N/A')
     .replace(/\{language\}/g, repo.language || 'N/A')
     .replace(/\{stars\}/g, String(repo.stars))
     .replace(/\{todayStars\}/g, String(repo.todayStars));
+}
 
-  const tmpFile = path.join(os.tmpdir(), `claude-prompt-${Date.now()}.txt`);
-  fs.writeFileSync(tmpFile, prompt, 'utf-8');
-
-  let raw: string;
-  try {
-    raw = execSync(`claude -p "$(cat '${tmpFile.replace(/\\/g, '/')}')"`, {
-      encoding: 'utf-8',
-      timeout: 300_000,
-      maxBuffer: 10 * 1024 * 1024,
-      shell: 'bash',
-    }).trim();
-  } catch (err: any) {
-    raw = `分析失败: ${err.message}\n\n原始错误: ${err.stderr?.toString()?.slice(0, 500) ?? 'N/A'}`;
-  } finally {
-    try { fs.unlinkSync(tmpFile); } catch {}
-  }
-
-  // Extract tags and summary from the response
+function parseAnalysis(raw: string, repo: TrendingRepo): AnalysisResult {
   const tagsMatch = raw.match(/^TAGS:\s*(.+)$/m);
   const summaryMatch = raw.match(/^SUMMARY:\s*(.+)$/m);
 
@@ -95,11 +81,88 @@ export function analyzeRepo(repo: TrendingRepo): AnalysisResult {
     ? summaryMatch[1].trim()
     : repo.description?.slice(0, 100) || '无描述';
 
-  // Remove the TAGS and SUMMARY lines from the markdown content
   const content = raw
     .replace(/^TAGS:.*$\n?/m, '')
     .replace(/^SUMMARY:.*$\n?/m, '')
     .trim();
 
   return { content, tags, summary };
+}
+
+function analyzeRepoViaCli(repo: TrendingRepo): AnalysisResult {
+  const prompt = buildPrompt(repo);
+  const tmpFile = path.join(os.tmpdir(), `claude-prompt-${Date.now()}.txt`);
+  fs.writeFileSync(tmpFile, prompt, 'utf-8');
+
+  let raw: string;
+  try {
+    raw = execSync(`pwsh -NoProfile -Command "Get-Content '${tmpFile.replace(/\\/g, '/')}' -Raw | claude -p"`, {
+      encoding: 'utf-8',
+      timeout: 600_000,
+      maxBuffer: 10 * 1024 * 1024,
+    }).trim();
+  } catch (err: any) {
+    raw = `分析失败: ${err.message}\n\n原始错误: ${err.stderr?.toString()?.slice(0, 500) ?? 'N/A'}`;
+  } finally {
+    try { fs.unlinkSync(tmpFile); } catch {}
+  }
+
+  return parseAnalysis(raw, repo);
+}
+
+async function analyzeRepoViaApi(repo: TrendingRepo, config: AppConfig): Promise<AnalysisResult> {
+  const prompt = buildPrompt(repo);
+  const url = `${config.api.baseUrl.replace(/\/+$/, '')}/chat/completions`;
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 600_000);
+
+  let raw: string;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${config.api.apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: config.api.model,
+        messages: [{ role: 'user', content: prompt }],
+      }),
+      signal: controller.signal,
+    });
+
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      raw = `分析失败: HTTP ${res.status} ${res.statusText}\n\n原始错误: ${errText.slice(0, 500)}`;
+    } else {
+      const data: any = await res.json();
+      raw = data.choices?.[0]?.message?.content?.trim() ?? '';
+      if (!raw) {
+        raw = `分析失败: API 返回为空\n\n原始响应: ${JSON.stringify(data).slice(0, 500)}`;
+      }
+    }
+  } catch (err: any) {
+    if (err.name === 'AbortError') {
+      raw = '分析失败: API 请求超时 (10分钟)';
+    } else {
+      raw = `分析失败: ${err.message}`;
+    }
+  } finally {
+    clearTimeout(timer);
+  }
+
+  return parseAnalysis(raw, repo);
+}
+
+export async function analyzeRepo(repo: TrendingRepo): Promise<AnalysisResult> {
+  const config = loadConfig();
+  validateConfig(config);
+
+  console.log(`🔧 分析模式: ${config.provider === 'api' ? `API (${config.api.model})` : 'Claude CLI'}`);
+
+  if (config.provider === 'api') {
+    return analyzeRepoViaApi(repo, config);
+  }
+  return analyzeRepoViaCli(repo);
 }
