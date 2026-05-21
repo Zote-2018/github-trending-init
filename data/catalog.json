@@ -17,17 +17,55 @@
       ],
       "summary": "面向Claude Code的多Agent编排平台，支持100+专业Agent集群、自学习记忆、零信任联邦通信和GOAP目标规划",
       "reportFile": "reports/2026-05-05-ruvnet-ruflo.md"
+    },
+    {
+      "repo": "colbymchenry/codegraph",
+      "url": "https://github.com/colbymchenry/codegraph",
+      "date": "2026-05-21",
+      "language": "TypeScript",
+      "tags": [
+        "typescript",
+        "ai",
+        "code-intelligence",
+        "tree-sitter",
+        "knowledge-graph",
+        "mcp",
+        "static-analysis",
+        "developer-tools"
+      ],
+      "summary": "为 AI 编程代理构建本地代码知识图谱，通过预索引实现平均 35% token 节省和 70% 工具调用减少，支持 19+ 语言和 13 个 Web 框架路由识别。",
+      "reportFile": "reports/2026-05-21-colbymchenry-codegraph.md"
+    },
+    {
+      "repo": "Imbad0202/academic-research-skills",
+      "url": "https://github.com/Imbad0202/academic-research-skills",
+      "date": "2026-05-21",
+      "language": "Python",
+      "tags": [
+        "python",
+        "claude",
+        "academic-writing",
+        "workflow",
+        "llm",
+        "research",
+        "automation",
+        "cli"
+      ],
+      "summary": "自动化研究到定稿全流程的 Claude Code 学术写作技能集",
+      "reportFile": "reports/2026-05-21-Imbad0202-academic-research-skills.md"
     }
   ],
   "byTag": {
     "typescript": [
-      "ruvnet/ruflo"
+      "ruvnet/ruflo",
+      "colbymchenry/codegraph"
     ],
     "multi-agent": [
       "ruvnet/ruflo"
     ],
     "mcp": [
-      "ruvnet/ruflo"
+      "ruvnet/ruflo",
+      "colbymchenry/codegraph"
     ],
     "claude-code": [
       "ruvnet/ruflo"
@@ -43,11 +81,57 @@
     ],
     "plugin": [
       "ruvnet/ruflo"
+    ],
+    "ai": [
+      "colbymchenry/codegraph"
+    ],
+    "code-intelligence": [
+      "colbymchenry/codegraph"
+    ],
+    "tree-sitter": [
+      "colbymchenry/codegraph"
+    ],
+    "knowledge-graph": [
+      "colbymchenry/codegraph"
+    ],
+    "static-analysis": [
+      "colbymchenry/codegraph"
+    ],
+    "developer-tools": [
+      "colbymchenry/codegraph"
+    ],
+    "python": [
+      "Imbad0202/academic-research-skills"
+    ],
+    "claude": [
+      "Imbad0202/academic-research-skills"
+    ],
+    "academic-writing": [
+      "Imbad0202/academic-research-skills"
+    ],
+    "workflow": [
+      "Imbad0202/academic-research-skills"
+    ],
+    "llm": [
+      "Imbad0202/academic-research-skills"
+    ],
+    "research": [
+      "Imbad0202/academic-research-skills"
+    ],
+    "automation": [
+      "Imbad0202/academic-research-skills"
+    ],
+    "cli": [
+      "Imbad0202/academic-research-skills"
     ]
   },
   "byLanguage": {
     "typescript": [
-      "ruvnet/ruflo"
+      "ruvnet/ruflo",
+      "colbymchenry/codegraph"
+    ],
+    "python": [
+      "Imbad0202/academic-research-skills"
     ]
   }
 }

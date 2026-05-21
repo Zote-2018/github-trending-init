@@ -1,0 +1,126 @@
+# colbymchenry/codegraph - GitHub Trending 深度分析
+
+> 📅 2026-05-21 | ⭐ 0 stars (+2123 today) | 🔧 TypeScript
+>
+> 🔗 仓库地址: [https://github.com/colbymchenry/codegraph](https://github.com/colbymchenry/codegraph)
+> 📦 Git Clone: \`git clone https://github.com/colbymchenry/codegraph.git\`
+> 📖 README: [README.md](https://github.com/colbymchenry/codegraph#readme)
+
+## 项目概述
+
+CodeGraph 是一个为 AI 编程代理（Claude Code、Cursor、Codex CLI、OpenCode）提供语义代码知识图谱的工具。它通过 tree-sitter 解析源代码，构建本地 SQLite 知识图谱数据库，让 AI 代理能通过结构化查询直接获取代码符号关系、调用链和上下文，而非反复执行 grep/find/read 等文件扫描操作。核心价值：大幅减少 token 消耗（平均 35%）和工具调用次数（平均 70%），同时保持 100% 本地运行，无需外部 API 或云服务。
+
+## 项目链接
+
+- 仓库地址: https://github.com/colbymchenry/codegraph
+- npm 包: `@colbymchenry/codegraph`
+- License: MIT
+
+## 技术栈
+
+| 类别 | 技术 |
+|------|------|
+| 语言 | TypeScript |
+| 构建工具 | tsc (TypeScript Compiler) |
+| 测试框架 | Vitest |
+| CLI 框架 | Commander.js |
+| 代码解析 | tree-sitter + 15+ 语言绑定（C, C++, C#, Go, Java, JS, Kotlin, PHP, Python, Ruby, Rust, Swift, TypeScript, Liquid） |
+| 数据库 | SQLite (better-sqlite3) + sqlite-vss（向量搜索） |
+| 全文搜索 | SQLite FTS5 |
+| 嵌入模型 | @xenova/transformers（本地推理） |
+| 代理协议 | MCP (Model Context Protocol) — stdio 传输 |
+| 文件监控 | 原生 OS 事件（FSEvents / inotify / ReadDirectoryChangesW） |
+| 运行环境 | Node.js >= 18 |
+
+## 核心功能
+
+- **语义知识图谱构建**：通过 tree-sitter 解析源码 AST，提取函数、类、方法等符号节点，以及调用、导入、继承、实现等边关系，存入本地 SQLite 图数据库
+- **MCP 工具集**：提供 8 个 MCP 工具（`codegraph_search`、`codegraph_context`、`codegraph_callers`、`codegraph_callees`、`codegraph_impact`、`codegraph_node`、`codegraph_files`、`codegraph_status`），供 AI 代理直接查询代码结构
+- **智能上下文构建**：`codegraph_context` 一次调用返回入口点、相关符号和代码片段，替代昂贵的 Explore Agent 文件扫描
+- **影响分析**：`codegraph_impact` 追踪符号的调用者、被调用者和完整影响范围，用于评估代码修改的影响面
+- **框架感知路由**：自动识别 13 个 Web 框架（Django、Flask、FastAPI、Express、NestJS、Laravel、Rails、Spring、Gin 等）的路由定义，将 URL 模式链接到处理器
+- **增量同步**：文件监控使用原生 OS 事件 + 2 秒去抖窗口，仅重新索引变更的源文件，图谱随编码实时更新
+- **19+ 语言支持**：TypeScript、JavaScript、Python、Go、Rust、Java、C#、PHP、Ruby、C/C++、Swift、Kotlin、Dart、Svelte、Vue、Liquid、Pascal/Delphi 等
+- **受影响测试检测**：`codegraph affected` 命令追踪导入依赖，找出变更文件影响的测试文件，支持 CI 集成
+- **多代理自动配置**：交互式安装器自动检测已安装的 AI 代理，写入对应的 MCP 配置和指令文件
+
+## 架构设计
+
+```
+┌─────────────────────────────────────────┐
+│        AI Agent (Claude Code / Cursor)   │
+│          MCP Client (stdio)              │
+└──────────────┬──────────────────────────┘
+               │ MCP Protocol
+               ▼
+┌─────────────────────────────────────────┐
+│        CodeGraph MCP Server              │
+│  ┌──────────┐ ┌──────────┐ ┌─────────┐ │
+│  │  Search   │ │ Callers  │ │ Context │ │
+│  └────┬─────┘ └────┬─────┘ └────┬────┘ │
+│       └────────────┼────────────┘       │
+│                    ▼                     │
+│  ┌─────────────────────────────────┐    │
+│  │   SQLite Graph DB (.codegraph/) │    │
+│  │   • 符号节点 + 边关系            │    │
+│  │   • FTS5 全文索引                │    │
+│  │   • 向量嵌入 (可选)              │    │
+│  └─────────────────────────────────┘    │
+└─────────────────────────────────────────┘
+               ▲
+┌──────────────┴──────────────────────────┐
+│        索引管线                          │
+│  tree-sitter AST → 语言查询 → 符号提取    │
+│  → 引用解析 → 边构建 → 存入 SQLite       │
+└─────────────────────────────────────────┘
+```
+
+**核心流程**：
+
+1. **提取阶段**：tree-sitter 将源码解析为 AST，语言特定查询提取节点（函数/类/方法）和边（调用/导入/继承）
+2. **存储阶段**：所有数据存入本地 SQLite（`.codegraph/codegraph.db`），含 FTS5 全文搜索索引
+3. **解析阶段**：后处理阶段将引用解析为具体定义——函数调用→定义、导入→源文件、类继承、框架路由模式
+4. **服务阶段**：MCP Server 通过 stdio 协议暴露工具，AI 代理即时查询
+5. **同步阶段**：原生文件监控 + 去抖增量更新，图谱随编码保持最新
+
+**关键设计模式**：
+- **预计算索引** vs 实时扫描——将探索成本前置到索引阶段，查询时 O(1)
+- **轻量级主会话 + 重 Explore 子代理**——主会话仅用 `search`/`callers` 等轻量工具做定位，探索任务委托给子代理使用 `codegraph_context`
+- **本地优先**——零外部依赖，SQLite 单文件数据库，WASM fallback 保证跨平台兼容
+
+## 亮点分析
+
+1. **精准定位了 AI 编程代理的痛点**：当前 AI 编码代理最大的 token 浪费在于代码探索——反复 grep/find/read 发现代码结构。CodeGraph 通过预构建知识图谱，将"探索"变为"查询"，从根本上改变了 AI 代理理解代码的方式。
+
+2. **性能数据扎实**：跨 7 个真实开源项目、7 种语言的基准测试，VS Code 级别的大仓库 token 减少 73%、工具调用减少 72%。数据具有说服力。
+
+3. **框架感知路由是差异化能力**：不仅提取通用代码结构，还理解 13 个 Web 框架的路由定义模式（Django `path()`、Spring `@GetMapping`、Express `app.get()` 等），将 URL 映射到处理器，这对理解 Web 项目架构非常有价值。
+
+4. **生态集成做得好**：一个 `npx` 命令自动检测并配置 Claude Code、Cursor、Codex CLI、OpenCode 四种代理的 MCP 配置、指令文件和权限设置，用户体验流畅。
+
+5. **增量同步机制精巧**：利用原生 OS 文件事件 + 去抖策略，仅重索引变更文件，图谱随编码实时更新且零配置。
+
+6. **`codegraph affected` 的 CI 集成思路**：追踪依赖图找受影响的测试文件，可以用于优化 CI 只跑相关测试，减少测试时间。
+
+## 适用场景
+
+| 场景 | 适用性 | 说明 |
+|------|--------|------|
+| AI 辅助大型代码库开发 | ★★★★★ | 核心场景，大仓库收益最显著 |
+| AI 代理代码理解与问答 | ★★★★★ | 直接查询替代文件扫描 |
+| 代码审查前的影响分析 | ★★★★☆ | `impact` 工具快速定位影响面 |
+| CI/CD 测试选择优化 | ★★★★☆ | `affected` 命令追踪依赖 |
+| 小型项目（<100 文件） | ★★☆☆☆ | 原生搜索已够快，收益有限 |
+| 非代码项目 | ★☆☆☆☆ | 不适用 |
+
+## 学习价值
+
+1. **tree-sitter 多语言解析架构**：如何为 15+ 语言设计统一的符号提取查询，并保持可扩展性
+2. **本地知识图谱设计**：用 SQLite 实现图数据库（节点+边），以及如何用 FTS5 实现高效全文搜索
+3. **MCP Server 开发模式**：完整的 MCP stdio 服务实现，包含工具注册、参数校验、错误处理
+4. **增量索引与文件监控**：基于原生 OS 事件的文件变更检测 + 去抖 + 增量同步的实现
+5. **AI 代理集成策略**：如何设计工具接口让 AI 代理高效使用——区分轻量工具（主会话）和重量工具（子代理）
+6. **框架特定的 AST 模式识别**：如何通过 tree-sitter 查询识别不同框架的路由模式
+
+---
+*Generated by github-trending-analyzer | 2026-05-21*

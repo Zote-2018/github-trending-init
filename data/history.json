@@ -18,6 +18,44 @@
         "plugin"
       ],
       "summary": "面向Claude Code的多Agent编排平台，支持100+专业Agent集群、自学习记忆、零信任联邦通信和GOAP目标规划"
+    },
+    {
+      "date": "2026-05-21",
+      "repo": "colbymchenry/codegraph",
+      "stars": 0,
+      "language": "TypeScript",
+      "todayStars": 2123,
+      "reportFile": "reports/2026-05-21-colbymchenry-codegraph.md",
+      "tags": [
+        "typescript",
+        "ai",
+        "code-intelligence",
+        "tree-sitter",
+        "knowledge-graph",
+        "mcp",
+        "static-analysis",
+        "developer-tools"
+      ],
+      "summary": "为 AI 编程代理构建本地代码知识图谱，通过预索引实现平均 35% token 节省和 70% 工具调用减少，支持 19+ 语言和 13 个 Web 框架路由识别。"
+    },
+    {
+      "date": "2026-05-21",
+      "repo": "Imbad0202/academic-research-skills",
+      "stars": 0,
+      "language": "Python",
+      "todayStars": 1667,
+      "reportFile": "reports/2026-05-21-Imbad0202-academic-research-skills.md",
+      "tags": [
+        "python",
+        "claude",
+        "academic-writing",
+        "workflow",
+        "llm",
+        "research",
+        "automation",
+        "cli"
+      ],
+      "summary": "自动化研究到定稿全流程的 Claude Code 学术写作技能集"
     }
   ]
 }
