@@ -12,6 +12,8 @@ export interface ApiConfig {
 export interface AppConfig {
   provider: 'api' | 'claude-cli';
   api: ApiConfig;
+  /** 可选 GitHub Token，用于 API 获取 repo 元信息（stars/language/description）。不填则回退到页面抓取 */
+  githubToken?: string;
 }
 
 const DEFAULT_CONFIG: AppConfig = {
@@ -21,6 +23,7 @@ const DEFAULT_CONFIG: AppConfig = {
     apiKey: '',
     model: 'gpt-4o',
   },
+  githubToken: '',
 };
 
 export function loadConfig(): AppConfig {

@@ -53,12 +53,96 @@
       ],
       "summary": "自动化研究到定稿全流程的 Claude Code 学术写作技能集",
       "reportFile": "reports/2026-05-21-Imbad0202-academic-research-skills.md"
+    },
+    {
+      "repo": "colbymchenry/codegraph",
+      "url": "https://github.com/colbymchenry/codegraph",
+      "date": "2026-05-22",
+      "language": "N/A",
+      "tags": [
+        "static-analysis",
+        "code-graph",
+        "visualization",
+        "ast",
+        "developer-tools",
+        "python",
+        "cli",
+        "dependency-graph"
+      ],
+      "summary": "静态分析工具，生成代码调用图与依赖图，辅助理解架构与重构。",
+      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md"
+    },
+    {
+      "repo": "colbymchenry/codegraph",
+      "url": "https://github.com/colbymchenry/codegraph",
+      "date": "2026-05-22",
+      "language": "N/A",
+      "tags": [
+        "codegraph",
+        "knowledge-graph",
+        "ai",
+        "coding-assistant",
+        "local",
+        "token-optimization",
+        "cli",
+        "tool"
+      ],
+      "summary": "为AI编程助手提供预构建的代码知识图谱，极大减少token消耗和工具调用，实现完全本地化。",
+      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md"
+    },
+    {
+      "repo": "colbymchenry/codegraph",
+      "url": "https://github.com/colbymchenry/codegraph",
+      "date": "2026-05-22",
+      "language": "N/A",
+      "tags": [
+        "code-graph",
+        "ai",
+        "developer-tools",
+        "local-first",
+        "knowledge-graph",
+        "tree-sitter",
+        "claude-code",
+        "cursor"
+      ],
+      "summary": "预索引本地代码知识图谱，大幅降低AI编码助手的token消耗与工具调用，支持Claude Code等主流工具。",
+      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md"
+    },
+    {
+      "repo": "vercel/ai",
+      "url": "https://github.com/vercel/ai",
+      "date": "2026-05-22",
+      "language": "TypeScript",
+      "tags": [
+        "typescript"
+      ],
+      "summary": "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source librar",
+      "reportFile": "reports/2026-05-22-vercel-ai.md"
+    },
+    {
+      "repo": "antfu/vscode-smart-clicks",
+      "url": "https://github.com/antfu/vscode-smart-clicks",
+      "date": "2026-05-22",
+      "language": "TypeScript",
+      "tags": [
+        "vscode-extension",
+        "typescript",
+        "editor",
+        "productivity",
+        "selection",
+        "developer-tools",
+        "smart-clicks"
+      ],
+      "summary": "为VS Code提供上下文感知的双击智能选择，支持语言级语义扩展，提升代码编辑效率。",
+      "reportFile": "reports/2026-05-22-antfu-vscode-smart-clicks.md"
     }
   ],
   "byTag": {
     "typescript": [
       "ruvnet/ruflo",
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "vercel/ai",
+      "antfu/vscode-smart-clicks"
     ],
     "multi-agent": [
       "ruvnet/ruflo"
@@ -68,7 +152,8 @@
       "colbymchenry/codegraph"
     ],
     "claude-code": [
-      "ruvnet/ruflo"
+      "ruvnet/ruflo",
+      "colbymchenry/codegraph"
     ],
     "swarm-intelligence": [
       "ruvnet/ruflo"
@@ -83,25 +168,35 @@
       "ruvnet/ruflo"
     ],
     "ai": [
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph",
       "colbymchenry/codegraph"
     ],
     "code-intelligence": [
       "colbymchenry/codegraph"
     ],
     "tree-sitter": [
+      "colbymchenry/codegraph",
       "colbymchenry/codegraph"
     ],
     "knowledge-graph": [
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph",
       "colbymchenry/codegraph"
     ],
     "static-analysis": [
+      "colbymchenry/codegraph",
       "colbymchenry/codegraph"
     ],
     "developer-tools": [
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph",
+      "antfu/vscode-smart-clicks"
     ],
     "python": [
-      "Imbad0202/academic-research-skills"
+      "Imbad0202/academic-research-skills",
+      "colbymchenry/codegraph"
     ],
     "claude": [
       "Imbad0202/academic-research-skills"
@@ -122,16 +217,74 @@
       "Imbad0202/academic-research-skills"
     ],
     "cli": [
-      "Imbad0202/academic-research-skills"
+      "Imbad0202/academic-research-skills",
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph"
+    ],
+    "code-graph": [
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph"
+    ],
+    "visualization": [
+      "colbymchenry/codegraph"
+    ],
+    "ast": [
+      "colbymchenry/codegraph"
+    ],
+    "dependency-graph": [
+      "colbymchenry/codegraph"
+    ],
+    "codegraph": [
+      "colbymchenry/codegraph"
+    ],
+    "coding-assistant": [
+      "colbymchenry/codegraph"
+    ],
+    "local": [
+      "colbymchenry/codegraph"
+    ],
+    "token-optimization": [
+      "colbymchenry/codegraph"
+    ],
+    "tool": [
+      "colbymchenry/codegraph"
+    ],
+    "local-first": [
+      "colbymchenry/codegraph"
+    ],
+    "cursor": [
+      "colbymchenry/codegraph"
+    ],
+    "vscode-extension": [
+      "antfu/vscode-smart-clicks"
+    ],
+    "editor": [
+      "antfu/vscode-smart-clicks"
+    ],
+    "productivity": [
+      "antfu/vscode-smart-clicks"
+    ],
+    "selection": [
+      "antfu/vscode-smart-clicks"
+    ],
+    "smart-clicks": [
+      "antfu/vscode-smart-clicks"
     ]
   },
   "byLanguage": {
     "typescript": [
       "ruvnet/ruflo",
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "vercel/ai",
+      "antfu/vscode-smart-clicks"
     ],
     "python": [
       "Imbad0202/academic-research-skills"
+    ],
+    "n/a": [
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph",
+      "colbymchenry/codegraph"
     ]
   }
 }

@@ -56,6 +56,93 @@
         "cli"
       ],
       "summary": "自动化研究到定稿全流程的 Claude Code 学术写作技能集"
+    },
+    {
+      "date": "2026-05-22",
+      "repo": "colbymchenry/codegraph",
+      "stars": 0,
+      "language": "N/A",
+      "todayStars": 0,
+      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md",
+      "tags": [
+        "static-analysis",
+        "code-graph",
+        "visualization",
+        "ast",
+        "developer-tools",
+        "python",
+        "cli",
+        "dependency-graph"
+      ],
+      "summary": "静态分析工具，生成代码调用图与依赖图，辅助理解架构与重构。"
+    },
+    {
+      "date": "2026-05-22",
+      "repo": "colbymchenry/codegraph",
+      "stars": 14931,
+      "language": "N/A",
+      "todayStars": 0,
+      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md",
+      "tags": [
+        "codegraph",
+        "knowledge-graph",
+        "ai",
+        "coding-assistant",
+        "local",
+        "token-optimization",
+        "cli",
+        "tool"
+      ],
+      "summary": "为AI编程助手提供预构建的代码知识图谱，极大减少token消耗和工具调用，实现完全本地化。"
+    },
+    {
+      "date": "2026-05-22",
+      "repo": "colbymchenry/codegraph",
+      "stars": 14996,
+      "language": "N/A",
+      "todayStars": 0,
+      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md",
+      "tags": [
+        "code-graph",
+        "ai",
+        "developer-tools",
+        "local-first",
+        "knowledge-graph",
+        "tree-sitter",
+        "claude-code",
+        "cursor"
+      ],
+      "summary": "预索引本地代码知识图谱，大幅降低AI编码助手的token消耗与工具调用，支持Claude Code等主流工具。"
+    },
+    {
+      "date": "2026-05-22",
+      "repo": "vercel/ai",
+      "stars": 24389,
+      "language": "TypeScript",
+      "todayStars": 0,
+      "reportFile": "reports/2026-05-22-vercel-ai.md",
+      "tags": [
+        "typescript"
+      ],
+      "summary": "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source librar"
+    },
+    {
+      "date": "2026-05-22",
+      "repo": "antfu/vscode-smart-clicks",
+      "stars": 689,
+      "language": "TypeScript",
+      "todayStars": 0,
+      "reportFile": "reports/2026-05-22-antfu-vscode-smart-clicks.md",
+      "tags": [
+        "vscode-extension",
+        "typescript",
+        "editor",
+        "productivity",
+        "selection",
+        "developer-tools",
+        "smart-clicks"
+      ],
+      "summary": "为VS Code提供上下文感知的双击智能选择，支持语言级语义扩展，提升代码编辑效率。"
     }
   ]
 }
