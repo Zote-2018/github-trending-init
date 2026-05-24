@@ -16,7 +16,7 @@
         "plugin"
       ],
       "summary": "面向Claude Code的多Agent编排平台，支持100+专业Agent集群、自学习记忆、零信任联邦通信和GOAP目标规划",
-      "reportFile": "reports/2026-05-05-ruvnet-ruflo.md"
+      "reportFile": "reports/多Agent编排平台-ruflo.md"
     },
     {
       "repo": "colbymchenry/codegraph",
@@ -34,7 +34,7 @@
         "developer-tools"
       ],
       "summary": "为 AI 编程代理构建本地代码知识图谱，通过预索引实现平均 35% token 节省和 70% 工具调用减少，支持 19+ 语言和 13 个 Web 框架路由识别。",
-      "reportFile": "reports/2026-05-21-colbymchenry-codegraph.md"
+      "reportFile": "reports/代码知识图谱-codegraph.md"
     },
     {
       "repo": "Imbad0202/academic-research-skills",
@@ -52,7 +52,7 @@
         "cli"
       ],
       "summary": "自动化研究到定稿全流程的 Claude Code 学术写作技能集",
-      "reportFile": "reports/2026-05-21-Imbad0202-academic-research-skills.md"
+      "reportFile": "reports/学术写作AI技能集-academic-research-skills.md"
     },
     {
       "repo": "colbymchenry/codegraph",
@@ -70,7 +70,7 @@
         "dependency-graph"
       ],
       "summary": "静态分析工具，生成代码调用图与依赖图，辅助理解架构与重构。",
-      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md"
+      "reportFile": "reports/代码知识图谱工具-codegraph.md"
     },
     {
       "repo": "colbymchenry/codegraph",
@@ -88,7 +88,7 @@
         "tool"
       ],
       "summary": "为AI编程助手提供预构建的代码知识图谱，极大减少token消耗和工具调用，实现完全本地化。",
-      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md"
+      "reportFile": "reports/代码知识图谱工具-codegraph.md"
     },
     {
       "repo": "colbymchenry/codegraph",
@@ -106,7 +106,7 @@
         "cursor"
       ],
       "summary": "预索引本地代码知识图谱，大幅降低AI编码助手的token消耗与工具调用，支持Claude Code等主流工具。",
-      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md"
+      "reportFile": "reports/代码知识图谱工具-codegraph.md"
     },
     {
       "repo": "vercel/ai",
@@ -117,7 +117,7 @@
         "typescript"
       ],
       "summary": "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source librar",
-      "reportFile": "reports/2026-05-22-vercel-ai.md"
+      "reportFile": "reports/AI工具包-vercel-ai.md"
     },
     {
       "repo": "antfu/vscode-smart-clicks",
@@ -134,7 +134,24 @@
         "smart-clicks"
       ],
       "summary": "为VS Code提供上下文感知的双击智能选择，支持语言级语义扩展，提升代码编辑效率。",
-      "reportFile": "reports/2026-05-22-antfu-vscode-smart-clicks.md"
+      "reportFile": "reports/VSCode智能点击-vscode-smart-clicks.md"
+    },
+    {
+      "repo": "Lum1104/Understand-Anything",
+      "url": "https://github.com/Lum1104/Understand-Anything",
+      "date": "2026-05-24",
+      "language": "TypeScript",
+      "tags": [
+        "typescript",
+        "react",
+        "knowledge-graph",
+        "ai",
+        "code-analysis",
+        "visualization",
+        "developer-tools"
+      ],
+      "summary": "将代码转化为交互知识图谱的智能化工具，集成主流AI编程助手，助力快速理解复杂系统。",
+      "reportFile": "reports/代码理解知识图谱-Understand-Anything.md"
     }
   ],
   "byTag": {
@@ -142,7 +159,8 @@
       "ruvnet/ruflo",
       "colbymchenry/codegraph",
       "vercel/ai",
-      "antfu/vscode-smart-clicks"
+      "antfu/vscode-smart-clicks",
+      "Lum1104/Understand-Anything"
     ],
     "multi-agent": [
       "ruvnet/ruflo"
@@ -170,7 +188,8 @@
     "ai": [
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "Lum1104/Understand-Anything"
     ],
     "code-intelligence": [
       "colbymchenry/codegraph"
@@ -182,7 +201,8 @@
     "knowledge-graph": [
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "Lum1104/Understand-Anything"
     ],
     "static-analysis": [
       "colbymchenry/codegraph",
@@ -192,7 +212,8 @@
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
-      "antfu/vscode-smart-clicks"
+      "antfu/vscode-smart-clicks",
+      "Lum1104/Understand-Anything"
     ],
     "python": [
       "Imbad0202/academic-research-skills",
@@ -226,7 +247,8 @@
       "colbymchenry/codegraph"
     ],
     "visualization": [
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "Lum1104/Understand-Anything"
     ],
     "ast": [
       "colbymchenry/codegraph"
@@ -269,6 +291,12 @@
     ],
     "smart-clicks": [
       "antfu/vscode-smart-clicks"
+    ],
+    "react": [
+      "Lum1104/Understand-Anything"
+    ],
+    "code-analysis": [
+      "Lum1104/Understand-Anything"
     ]
   },
   "byLanguage": {
@@ -276,7 +304,8 @@
       "ruvnet/ruflo",
       "colbymchenry/codegraph",
       "vercel/ai",
-      "antfu/vscode-smart-clicks"
+      "antfu/vscode-smart-clicks",
+      "Lum1104/Understand-Anything"
     ],
     "python": [
       "Imbad0202/academic-research-skills"

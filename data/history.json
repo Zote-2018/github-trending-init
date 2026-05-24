@@ -6,7 +6,7 @@
       "stars": 0,
       "language": "TypeScript",
       "todayStars": 2598,
-      "reportFile": "reports/2026-05-05-ruvnet-ruflo.md",
+      "reportFile": "reports/多Agent编排平台-ruflo.md",
       "tags": [
         "typescript",
         "multi-agent",
@@ -25,7 +25,7 @@
       "stars": 0,
       "language": "TypeScript",
       "todayStars": 2123,
-      "reportFile": "reports/2026-05-21-colbymchenry-codegraph.md",
+      "reportFile": "reports/代码知识图谱-codegraph.md",
       "tags": [
         "typescript",
         "ai",
@@ -44,7 +44,7 @@
       "stars": 0,
       "language": "Python",
       "todayStars": 1667,
-      "reportFile": "reports/2026-05-21-Imbad0202-academic-research-skills.md",
+      "reportFile": "reports/学术写作AI技能集-academic-research-skills.md",
       "tags": [
         "python",
         "claude",
@@ -63,7 +63,7 @@
       "stars": 0,
       "language": "N/A",
       "todayStars": 0,
-      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md",
+      "reportFile": "reports/代码知识图谱工具-codegraph.md",
       "tags": [
         "static-analysis",
         "code-graph",
@@ -82,7 +82,7 @@
       "stars": 14931,
       "language": "N/A",
       "todayStars": 0,
-      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md",
+      "reportFile": "reports/代码知识图谱工具-codegraph.md",
       "tags": [
         "codegraph",
         "knowledge-graph",
@@ -101,7 +101,7 @@
       "stars": 14996,
       "language": "N/A",
       "todayStars": 0,
-      "reportFile": "reports/2026-05-22-colbymchenry-codegraph.md",
+      "reportFile": "reports/代码知识图谱工具-codegraph.md",
       "tags": [
         "code-graph",
         "ai",
@@ -120,7 +120,7 @@
       "stars": 24389,
       "language": "TypeScript",
       "todayStars": 0,
-      "reportFile": "reports/2026-05-22-vercel-ai.md",
+      "reportFile": "reports/AI工具包-vercel-ai.md",
       "tags": [
         "typescript"
       ],
@@ -132,7 +132,7 @@
       "stars": 689,
       "language": "TypeScript",
       "todayStars": 0,
-      "reportFile": "reports/2026-05-22-antfu-vscode-smart-clicks.md",
+      "reportFile": "reports/VSCode智能点击-vscode-smart-clicks.md",
       "tags": [
         "vscode-extension",
         "typescript",
@@ -143,6 +143,24 @@
         "smart-clicks"
       ],
       "summary": "为VS Code提供上下文感知的双击智能选择，支持语言级语义扩展，提升代码编辑效率。"
+    },
+    {
+      "date": "2026-05-24",
+      "repo": "Lum1104/Understand-Anything",
+      "stars": 0,
+      "language": "TypeScript",
+      "todayStars": 2299,
+      "reportFile": "reports/代码理解知识图谱-Understand-Anything.md",
+      "tags": [
+        "typescript",
+        "react",
+        "knowledge-graph",
+        "ai",
+        "code-analysis",
+        "visualization",
+        "developer-tools"
+      ],
+      "summary": "将代码转化为交互知识图谱的智能化工具，集成主流AI编程助手，助力快速理解复杂系统。"
     }
   ]
 }

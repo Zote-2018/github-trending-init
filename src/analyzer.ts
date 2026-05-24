@@ -51,12 +51,16 @@ Choose 5-8 tags from: the language, framework names, domain (e.g. ai, web, datab
 Also output EXACTLY this format for summary (one line, no other text on this line):
 SUMMARY: 一句话中文摘要本项目 (under 100 chars)
 
+Also output EXACTLY this format for title (one line, no other text on this line):
+TITLE: 4-10字中文简称 (用作文件名，简短概括项目，不含特殊符号)
+
 Respond in well-formatted Markdown. Be specific, insightful, and thorough.`;
 
 export interface AnalysisResult {
   content: string;
   tags: string[];
   summary: string;
+  title: string;
 }
 
 function buildPrompt(repo: TrendingRepo): string {
@@ -81,12 +85,18 @@ function parseAnalysis(raw: string, repo: TrendingRepo): AnalysisResult {
     ? summaryMatch[1].trim()
     : repo.description?.slice(0, 100) || '无描述';
 
+  const titleMatch = raw.match(/^TITLE:\s*(.+)$/m);
+  const title = titleMatch
+    ? titleMatch[1].trim().replace(/[\\/:*?"<>|]/g, '')
+    : repo.name.split('/')[1];
+
   const content = raw
     .replace(/^TAGS:.*$\n?/m, '')
     .replace(/^SUMMARY:.*$\n?/m, '')
+    .replace(/^TITLE:.*$\n?/m, '')
     .trim();
 
-  return { content, tags, summary };
+  return { content, tags, summary, title };
 }
 
 function analyzeRepoViaCli(repo: TrendingRepo): AnalysisResult {

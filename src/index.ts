@@ -11,11 +11,12 @@ function ensureReportsDir() {
   if (!fs.existsSync(REPORTS_DIR)) fs.mkdirSync(REPORTS_DIR, { recursive: true });
 }
 
-function generateReport(repo: ReturnType<typeof pickTopNew>, analysis: string): string {
+function generateReport(repo: ReturnType<typeof pickTopNew>, analysis: string, title: string): string {
   if (!repo) return '';
   const date = new Date().toISOString().slice(0, 10);
+  const safeTitle = title.replace(/[\\/:*?"<>|]/g, '').slice(0, 50);
   const repoSlug = repo.name.replace(/\//g, '-');
-  const filename = `${date}-${repoSlug}.md`;
+  const filename = `${safeTitle}-${repoSlug}.md`;
 
   const content = `# ${repo.name} - GitHub Trending 深度分析
 
@@ -67,12 +68,12 @@ async function main() {
 
   // 4. Claude 深度分析
   console.log('🤖 正在调用 Claude 深度分析...');
-  const { content: analysisContent, tags, summary } = await analyzeRepo(repo);
+  const { content: analysisContent, tags, summary, title } = await analyzeRepo(repo);
   console.log(`✅ 分析完成 | 标签: ${tags.join(', ')}`);
   console.log(`📝 摘要: ${summary}`);
 
   // 5. 生成报告
-  const reportFile = generateReport(repo, analysisContent);
+  const reportFile = generateReport(repo, analysisContent, title);
   console.log(`📄 报告已生成: reports/${reportFile}`);
 
   // 6. 更新历史
