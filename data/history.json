@@ -161,6 +161,43 @@
         "developer-tools"
       ],
       "summary": "将代码转化为交互知识图谱的智能化工具，集成主流AI编程助手，助力快速理解复杂系统。"
+    },
+    {
+      "date": "2026-05-31",
+      "repo": "microsoft/markitdown",
+      "stars": 0,
+      "language": "Python",
+      "todayStars": 2470,
+      "reportFile": "reports/MarkItDown-microsoft-markitdown.md",
+      "tags": [
+        "python",
+        "markdown",
+        "document-conversion",
+        "office",
+        "pdf",
+        "ai",
+        "microsoft",
+        "tool"
+      ],
+      "summary": "微软开源的Python工具，将Office/PDF/图片/音频等文件统一转换为Markdown。"
+    },
+    {
+      "date": "2026-05-31",
+      "repo": "harry0703/MoneyPrinterTurbo",
+      "stars": 0,
+      "language": "Python",
+      "todayStars": 2768,
+      "reportFile": "reports/AI一键视频生成神器-harry0703-MoneyPrinterTurbo.md",
+      "tags": [
+        "python",
+        "ai",
+        "video-generation",
+        "llm",
+        "text-to-speech",
+        "tool",
+        "automation"
+      ],
+      "summary": "利用 AI 大模型一键生成带配音、字幕、素材的高清短视频，解放内容创作者生产力。"
     }
   ]
 }

@@ -152,6 +152,41 @@
       ],
       "summary": "将代码转化为交互知识图谱的智能化工具，集成主流AI编程助手，助力快速理解复杂系统。",
       "reportFile": "reports/代码理解知识图谱-Understand-Anything.md"
+    },
+    {
+      "repo": "microsoft/markitdown",
+      "url": "https://github.com/microsoft/markitdown",
+      "date": "2026-05-31",
+      "language": "Python",
+      "tags": [
+        "python",
+        "markdown",
+        "document-conversion",
+        "office",
+        "pdf",
+        "ai",
+        "microsoft",
+        "tool"
+      ],
+      "summary": "微软开源的Python工具，将Office/PDF/图片/音频等文件统一转换为Markdown。",
+      "reportFile": "reports/MarkItDown-microsoft-markitdown.md"
+    },
+    {
+      "repo": "harry0703/MoneyPrinterTurbo",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+      "date": "2026-05-31",
+      "language": "Python",
+      "tags": [
+        "python",
+        "ai",
+        "video-generation",
+        "llm",
+        "text-to-speech",
+        "tool",
+        "automation"
+      ],
+      "summary": "利用 AI 大模型一键生成带配音、字幕、素材的高清短视频，解放内容创作者生产力。",
+      "reportFile": "reports/AI一键视频生成神器-harry0703-MoneyPrinterTurbo.md"
     }
   ],
   "byTag": {
@@ -189,7 +224,9 @@
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
-      "Lum1104/Understand-Anything"
+      "Lum1104/Understand-Anything",
+      "microsoft/markitdown",
+      "harry0703/MoneyPrinterTurbo"
     ],
     "code-intelligence": [
       "colbymchenry/codegraph"
@@ -217,7 +254,9 @@
     ],
     "python": [
       "Imbad0202/academic-research-skills",
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "microsoft/markitdown",
+      "harry0703/MoneyPrinterTurbo"
     ],
     "claude": [
       "Imbad0202/academic-research-skills"
@@ -229,13 +268,15 @@
       "Imbad0202/academic-research-skills"
     ],
     "llm": [
-      "Imbad0202/academic-research-skills"
+      "Imbad0202/academic-research-skills",
+      "harry0703/MoneyPrinterTurbo"
     ],
     "research": [
       "Imbad0202/academic-research-skills"
     ],
     "automation": [
-      "Imbad0202/academic-research-skills"
+      "Imbad0202/academic-research-skills",
+      "harry0703/MoneyPrinterTurbo"
     ],
     "cli": [
       "Imbad0202/academic-research-skills",
@@ -269,7 +310,9 @@
       "colbymchenry/codegraph"
     ],
     "tool": [
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "microsoft/markitdown",
+      "harry0703/MoneyPrinterTurbo"
     ],
     "local-first": [
       "colbymchenry/codegraph"
@@ -297,6 +340,27 @@
     ],
     "code-analysis": [
       "Lum1104/Understand-Anything"
+    ],
+    "markdown": [
+      "microsoft/markitdown"
+    ],
+    "document-conversion": [
+      "microsoft/markitdown"
+    ],
+    "office": [
+      "microsoft/markitdown"
+    ],
+    "pdf": [
+      "microsoft/markitdown"
+    ],
+    "microsoft": [
+      "microsoft/markitdown"
+    ],
+    "video-generation": [
+      "harry0703/MoneyPrinterTurbo"
+    ],
+    "text-to-speech": [
+      "harry0703/MoneyPrinterTurbo"
     ]
   },
   "byLanguage": {
@@ -308,7 +372,9 @@
       "Lum1104/Understand-Anything"
     ],
     "python": [
-      "Imbad0202/academic-research-skills"
+      "Imbad0202/academic-research-skills",
+      "microsoft/markitdown",
+      "harry0703/MoneyPrinterTurbo"
     ],
     "n/a": [
       "colbymchenry/codegraph",

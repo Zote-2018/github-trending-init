@@ -74,8 +74,11 @@ function buildPrompt(repo: TrendingRepo): string {
 }
 
 function parseAnalysis(raw: string, repo: TrendingRepo): AnalysisResult {
-  const tagsMatch = raw.match(/^TAGS:\s*(.+)$/m);
-  const summaryMatch = raw.match(/^SUMMARY:\s*(.+)$/m);
+  // 去掉 markdown 代码块包裹，防止结构化字段被包裹在 ``` 内导致正则匹配失败
+  const cleaned = raw.replace(/^```\w*\n?/gm, '').replace(/```\s*$/gm, '');
+
+  const tagsMatch = cleaned.match(/^TAGS:\s*(.+)$/m);
+  const summaryMatch = cleaned.match(/^SUMMARY:\s*(.+)$/m);
 
   const tags = tagsMatch
     ? tagsMatch[1].split(',').map(t => t.trim().toLowerCase()).filter(Boolean)
@@ -85,12 +88,12 @@ function parseAnalysis(raw: string, repo: TrendingRepo): AnalysisResult {
     ? summaryMatch[1].trim()
     : repo.description?.slice(0, 100) || '无描述';
 
-  const titleMatch = raw.match(/^TITLE:\s*(.+)$/m);
+  const titleMatch = cleaned.match(/^TITLE:\s*(.+)$/m);
   const title = titleMatch
     ? titleMatch[1].trim().replace(/[\\/:*?"<>|]/g, '')
     : repo.name.split('/')[1];
 
-  const content = raw
+  const content = cleaned
     .replace(/^TAGS:.*$\n?/m, '')
     .replace(/^SUMMARY:.*$\n?/m, '')
     .replace(/^TITLE:.*$\n?/m, '')
