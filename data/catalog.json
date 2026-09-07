@@ -187,6 +187,23 @@
       ],
       "summary": "利用 AI 大模型一键生成带配音、字幕、素材的高清短视频，解放内容创作者生产力。",
       "reportFile": "reports/AI一键视频生成神器-harry0703-MoneyPrinterTurbo.md"
+    },
+    {
+      "repo": "kenn-io/agentsview",
+      "url": "https://github.com/kenn-io/agentsview",
+      "date": "2026-09-07",
+      "language": "Go",
+      "tags": [
+        "go",
+        "ai",
+        "developer-tools",
+        "analytics",
+        "cli",
+        "local-first",
+        "sqlite"
+      ],
+      "summary": "本地优先的 AI 编码 Agent 会话分析工具：统一索引 20+ Agent（Claude Code、Codex、OpenCode 等）会话，提供全文/语义搜索、token 用量与成本统计及 Web 仪表盘",
+      "reportFile": "reports/AI编码会话分析器-agentsview.md"
     }
   ],
   "byTag": {
@@ -226,7 +243,8 @@
       "colbymchenry/codegraph",
       "Lum1104/Understand-Anything",
       "microsoft/markitdown",
-      "harry0703/MoneyPrinterTurbo"
+      "harry0703/MoneyPrinterTurbo",
+      "kenn-io/agentsview"
     ],
     "code-intelligence": [
       "colbymchenry/codegraph"
@@ -250,7 +268,8 @@
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
       "antfu/vscode-smart-clicks",
-      "Lum1104/Understand-Anything"
+      "Lum1104/Understand-Anything",
+      "kenn-io/agentsview"
     ],
     "python": [
       "Imbad0202/academic-research-skills",
@@ -281,7 +300,8 @@
     "cli": [
       "Imbad0202/academic-research-skills",
       "colbymchenry/codegraph",
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "kenn-io/agentsview"
     ],
     "code-graph": [
       "colbymchenry/codegraph",
@@ -315,7 +335,8 @@
       "harry0703/MoneyPrinterTurbo"
     ],
     "local-first": [
-      "colbymchenry/codegraph"
+      "colbymchenry/codegraph",
+      "kenn-io/agentsview"
     ],
     "cursor": [
       "colbymchenry/codegraph"
@@ -361,6 +382,15 @@
     ],
     "text-to-speech": [
       "harry0703/MoneyPrinterTurbo"
+    ],
+    "go": [
+      "kenn-io/agentsview"
+    ],
+    "analytics": [
+      "kenn-io/agentsview"
+    ],
+    "sqlite": [
+      "kenn-io/agentsview"
     ]
   },
   "byLanguage": {
@@ -380,6 +410,9 @@
       "colbymchenry/codegraph",
       "colbymchenry/codegraph",
       "colbymchenry/codegraph"
+    ],
+    "go": [
+      "kenn-io/agentsview"
     ]
   }
 }
