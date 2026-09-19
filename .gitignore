@@ -2,3 +2,7 @@ node_modules/
 dist/
 config.json
 .codragraph
+
+# agent-sync:begin
+.agents/sessions/
+# agent-sync:end
