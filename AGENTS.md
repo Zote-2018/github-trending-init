@@ -76,46 +76,81 @@ AI agent operational notes for github-trending-init. Complements `CLAUDE.md` (ar
 
 API 模式调用 `${baseUrl}/chat/completions`，通过 `AbortController` 实现 10 分钟超时，`node-fetch` 发起 POST。
 
-<!-- codragraph:start -->
-# CodraGraph — Code Intelligence
+---
 
-This project is indexed by CodraGraph as **github-trending-init** (225 symbols, 315 relationships, 8 execution flows). Use the CodraGraph MCP tools to understand code, assess impact, and navigate safely.
+<!-- merged-from: CLAUDE.md 2026-08-16 -->
 
-> If any CodraGraph tool warns the index is stale, run `npx @codragraph/cli analyze` in terminal first.
+# CLAUDE.md
 
-## Always Do
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-- **MUST run impact analysis before editing any symbol.** Before modifying a function, class, or method, run `codragraph_impact({target: "symbolName", direction: "upstream"})` and report the blast radius (direct callers, affected processes, risk level) to the user.
-- **MUST run `codragraph_detect_changes()` before committing** to verify your changes only affect expected symbols and execution flows.
-- **MUST warn the user** if impact analysis returns HIGH or CRITICAL risk before proceeding with edits.
-- When exploring unfamiliar code, use `codragraph_query({query: "concept"})` to find execution flows instead of grepping. It returns process-grouped results ranked by relevance.
-- When you need full context on a specific symbol — callers, callees, which execution flows it participates in — use `codragraph_context({name: "symbolName"})`.
+## 项目简介
 
-## Never Do
+GitHub Trending 每日自动分析工具。抓取 GitHub Trending 页面，选取未分析过的新项目，调用本地 Claude CLI 生成中文深度分析报告，并维护历史索引和可搜索的目录。
 
-- NEVER edit a function, class, or method without first running `codragraph_impact` on it.
-- NEVER ignore HIGH or CRITICAL risk warnings from impact analysis.
-- NEVER rename symbols with find-and-replace — use `codragraph_rename` which understands the call graph.
-- NEVER commit changes without running `codragraph_detect_changes()` to check affected scope.
+## 常用命令
 
-## Resources
+```bash
+# 运行一次分析（抓取 trending → 选项目 → 生成报告）
+npm start
 
-| Resource | Use for |
-|----------|---------|
-| `codragraph://repo/github-trending-init/context` | Codebase overview, check index freshness |
-| `codragraph://repo/github-trending-init/clusters` | All functional areas |
-| `codragraph://repo/github-trending-init/processes` | All execution flows |
-| `codragraph://repo/github-trending-init/process/{name}` | Step-by-step execution trace |
+# 注册/注销 Windows 定时任务（每天凌晨 1:00）
+npm run schedule
+npm run unschedule
 
-## CLI
+# 搜索已分析的项目（按标签、语言、摘要匹配）
+npm run search "关键词"
 
-| Task | Read this skill file |
-|------|---------------------|
-| Understand architecture / "How does X work?" | `.claude/skills/codragraph/codragraph-exploring/SKILL.md` |
-| Blast radius / "What breaks if I change X?" | `.claude/skills/codragraph/codragraph-impact-analysis/SKILL.md` |
-| Trace bugs / "Why is X failing?" | `.claude/skills/codragraph/codragraph-debugging/SKILL.md` |
-| Rename / extract / split / refactor | `.claude/skills/codragraph/codragraph-refactoring/SKILL.md` |
-| Tools, resources, schema reference | `.claude/skills/codragraph/codragraph-guide/SKILL.md` |
-| Index, status, clean, wiki CLI commands | `.claude/skills/codragraph/codragraph-cli/SKILL.md` |
+# 直接运行（开发时）
+npx tsx src/index.ts
+```
 
-<!-- codragraph:end -->
+无需 build 步骤，`tsx` 直接执行 TypeScript。无测试框架。
+
+## 架构
+
+单次运行流程（`src/index.ts` 主入口）：
+
+1. **trending.ts** — `fetchTrending()` 用 node-fetch + cheerio 抓取 `github.com/trending` HTML，解析出项目列表。`pickTopNew()` 跳过已分析项目，返回第一个新项目。
+2. **analyzer.ts** — `analyzeRepo()` 将项目信息填入 prompt 模板，通过 `execSync` 调用 `claude -p` 命令行生成分析。从响应中提取 `TAGS:` 和 `SUMMARY:` 行作为结构化元数据。
+3. **history.ts** — 读写 `data/history.json`，维护已分析项目的去重记录。
+4. **catalog.ts** — `updateCatalog()` 从历史记录构建 `data/catalog.json`，包含按 tag 和 language 分组的倒排索引。`searchCatalog()` 提供加权搜索（标签权重 > 语言 > 仓库名 > 摘要）。
+5. **scheduler.ts** — 通过 Windows `schtasks` 注册每日定时任务。
+6. **search.ts** — CLI 搜索入口，先搜 catalog 索引，再全文搜索报告文件内容。
+
+## 关键约定
+
+- **报告格式**：`reports/{date}-{owner}-{repo}.md`，含标准 front matter（日期、星标、语言、链接）
+- **数据文件**：`data/history.json`（分析历史）和 `data/catalog.json`（搜索索引），均 JSON 格式
+- **Claude CLI 依赖**：analyzer 模块通过 shell 调用系统安装的 `claude` CLI，超时 10 分钟
+- **Windows 专用**：定时任务使用 `schtasks`，scheduler 通过 `cmd.exe` 执行
+- **中文输出**：所有报告和分析结果为中文
+
+## 类型定义（src/types.ts）
+
+- `TrendingRepo` — trending 项目原始数据（名称、描述、语言、星标数）
+- `HistoryRecord` — 历史记录（含标签、摘要、报告文件路径）
+- `CatalogEntry` — 目录条目；`Catalog` 包含 `byTag`/`byLanguage` 倒排索引
+
+<!-- agent-sync:memory begin v1 -->
+# 记忆与 Skill 约定（agent-sync 维护区块，勿手改）
+
+## 项目记忆（.agents/memory/）
+- 任务开始先读 `.agents/memory/MEMORY.md` 索引，按需读对应类型文件
+- 决策 → decisions.md；踩坑/已知问题 → known-issues.md；待办 → todo.md；偏好 → preferences.md
+- 条目格式：`### YYYY-MM-DD 标题` + 正文；写入后同步更新 MEMORY.md 索引行
+- 临时记忆放 `tmp/`（一话题一文件），会话结束尽量删除；超 7 天由 agent-sync clean 清理
+- 绝不把密码/token/密钥写入记忆
+
+## 会话存档（.agents/sessions/）
+- 本会话结束前执行 `agent-sync session-save --agent <你的agent名>`
+  （PATH 无该命令时：`uv run --project "D:/work/agent-control" agent-sync session-save --agent <名>`）
+- 存档为原始对话转档，供"沉淀记忆"时总结
+
+## 项目 Skill（.agents/skills/）
+- 本项目专属 skill 位于 `D:/work/study/github-trending-init/.agents/skills/`（需当前 agent 已配置该读取位）
+
+## 记忆沉淀
+- 用户说"沉淀记忆 / 总结记忆"时执行 memory-distill skill：读 `.agents/sessions/` 未总结存档，
+  项目经验写入上述类型文件，你的操作习惯写入自家 `~/.<agent>/notes/` 并更新其索引
+<!-- agent-sync:memory end -->
